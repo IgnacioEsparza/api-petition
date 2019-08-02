@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const app = require('./app');
 const config = require('./config');
 
-mongoose.connect(config.db, { useNewUrlParser: true }, (err, res) => {
+mongoose.connect(config.db, { useCreateIndex: true, useNewUrlParser: true }, (err, res) => {
     if (err) {
         return console.log(`Error al conectar con la base de datos ${err}`);
     }
