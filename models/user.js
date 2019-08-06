@@ -12,7 +12,8 @@ const UserSchema = Schema({
     avatar: String,
     password: { type: String, select: false },
     signupDate: { type: Date, default: Date.now() },
-    lastLogin: Date
+    lastLogin: Date,
+    propuestasApoyadas: [{type: mongoose.Schema.Types.ObjectId, ref: 'Propuesta'}]
 })
 
 //se crea la contraseña

@@ -13,8 +13,8 @@ api.get('/propuesta/:propuestaId', propuestaCtrl.getPropuesta);
 
 // api.post('/propuesta', auth, propuestaCtrl.savePropuesta);
 api.post('/propuesta', propuestaCtrl.savePropuesta);
-api.put('/propuesta/:propuestaId' auth, propuestaCtrl.updatePropuesta);
-api.delete('/propuesta/:propuestaId', auth, propuestaCtrl.deletePropuesta);
+api.put('/propuesta/:propuestaId', propuestaCtrl.updatePropuesta);
+api.delete('/propuesta/:propuestaId', propuestaCtrl.deletePropuesta);
 
 api.post('/signup', userCtrl.signUp);
 api.post('/login', userCtrl.signIn);
