@@ -16,6 +16,11 @@ api.post('/propuesta', propuestaCtrl.savePropuesta);
 api.put('/propuesta/:propuestaId', propuestaCtrl.updatePropuesta);
 api.delete('/propuesta/:propuestaId', propuestaCtrl.deletePropuesta);
 
+api.get('/user/:userId', userCtrl.getUser);
+api.get('/user', userCtrl.getUsers);
+api.delete('/user/:userId', userCtrl.deleteUser);
+api.put('/user/:userId', userCtrl.updateUser);
+
 api.post('/signup', userCtrl.signUp);
 api.post('/login', userCtrl.signIn);
 api.get('/private', auth, function (req, res) {
