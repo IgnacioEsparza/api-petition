@@ -89,7 +89,7 @@ function deleteUser(req, res) {
         if (err) {
             res.status(500).send({ message: `Error al borrar usuario en la base de datos ${err}` });
         }
-
+        if (!user) return res.status(404).send({ message: 'No existe el usuario' })
         user.remove(err => {
             if (err) {
                 res.status(500).send({ message: `Error al borrar usuario en la base de datos ${err}` });
@@ -111,6 +111,7 @@ function updateUser(req, res) {
         if (err) {
             return res.status(500).send({ message: `Error al actualizar producto en la base de datos ${err}` });
         }
+        if (!user) return res.status(404).send({ message: 'No existe el usuario' })
         return res.status(200).send({ user: userUpdated });
     });
 

@@ -7,10 +7,10 @@ const crypto = require('crypto')
 const Schema = mongoose.Schema
 
 const UserSchema = Schema({
-    email: { type: String, unique: true, lowercase: true },
+    email: { type: String, unique: true, lowercase: true, require: true },
     displayName: String,
     avatar: String,
-    password: { type: String, select: false },
+    password: { type: String, select: false, require: true },
     signupDate: { type: Date, default: Date.now() },
     lastLogin: Date,
     propuestasApoyadas: [{type: mongoose.Schema.Types.ObjectId, ref: 'Propuesta'}]
