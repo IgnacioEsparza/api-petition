@@ -15,6 +15,10 @@ function signUp(req, res) {
         password: req.body.password
     })
 
+    if (!validacion(user.email)) return res.status(422).send({ message: `Error al crear el usuario` });
+    if (!validacion(user.displayName)) return res.status(422).send({ message: `Error al crear el usuario` });
+    if (!validacion(user.password)) return res.status(422).send({ message: `Error al crear el usuario` });
+
     user.save((err) => {
 
         if (err) {
@@ -33,7 +37,7 @@ function signIn(req, res) {
         //console.log('Body : ' + req.body.password + ' Mongo: ' + user.password)
 
         bcrypt.compare(req.body.password, user.password, function (err, decrypt) {
-            if(err) return res.status(500).send({ message: err});
+            if (err) return res.status(500).send({ message: err });
 
             if (decrypt) {
                 req.user = user
@@ -102,6 +106,10 @@ function deleteUser(req, res) {
 
 function updateUser(req, res) {
 
+    // if (!validacion(req.body.email)) return res.status(422).send({ message: `Error al crear el usuario` });
+    // if (!validacion(req.body.displayName)) return res.status(422).send({ message: `Error al crear el usuario` });
+    // if (!validacion(req.body.password)) return res.status(422).send({ message: `Error al crear el usuario` });
+
     let userId = req.params.userId;
     let update = req.body;
 
@@ -111,10 +119,17 @@ function updateUser(req, res) {
         if (err) {
             return res.status(500).send({ message: `Error al actualizar producto en la base de datos ${err}` });
         }
-        if (!user) return res.status(404).send({ message: 'No existe el usuario' })
         return res.status(200).send({ user: userUpdated });
     });
 
+}
+
+function validacion(campo) {
+    if (campo == null || campo == '') {
+        return false;
+    } else {
+        return true;
+    }
 }
 
 module.exports = {
