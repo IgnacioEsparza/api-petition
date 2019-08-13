@@ -16,8 +16,8 @@ api.post('/propuesta', propuestaCtrl.savePropuesta);
 api.put('/propuesta/:propuestaId', propuestaCtrl.updatePropuesta);
 api.delete('/propuesta/:propuestaId', propuestaCtrl.deletePropuesta);
 
-api.get('/user/:userId', auth, userCtrl.getUser);
-api.get('/user', auth, userCtrl.getUsers);
+api.get('/user', auth, userCtrl.getUser);
+api.get('/users', auth, userCtrl.getUsers);
 api.delete('/user/:userId', auth, userCtrl.deleteUser);
 api.put('/user/:userId', auth, userCtrl.updateUser);
 

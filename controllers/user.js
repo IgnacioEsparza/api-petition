@@ -54,7 +54,7 @@ function signIn(req, res) {
 
 function getUser(req, res) {
 
-    let userId = req.params.userId;
+    let userId = req.user;
 
     User.findById(userId, (err, user) => {
         if (err) {
