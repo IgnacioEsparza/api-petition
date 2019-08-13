@@ -16,10 +16,10 @@ api.post('/propuesta', propuestaCtrl.savePropuesta);
 api.put('/propuesta/:propuestaId', propuestaCtrl.updatePropuesta);
 api.delete('/propuesta/:propuestaId', propuestaCtrl.deletePropuesta);
 
-api.get('/user/:userId', userCtrl.getUser);
-api.get('/user', userCtrl.getUsers);
-api.delete('/user/:userId', userCtrl.deleteUser);
-api.put('/user/:userId', userCtrl.updateUser);
+api.get('/user/:userId', auth, userCtrl.getUser);
+api.get('/user', auth, userCtrl.getUsers);
+api.delete('/user/:userId', auth, userCtrl.deleteUser);
+api.put('/user/:userId', auth, userCtrl.updateUser);
 
 api.post('/signup', userCtrl.signUp);
 api.post('/login', userCtrl.signIn);
