@@ -148,7 +148,7 @@ function addProposeUser(req, res){
         user.save((err)=>{
             if(err) return res.status(500).send({ message: `Error al actualizar producto en la base de datos ${err}` });
             
-            return user.status(201).send(true);
+            return res.status(201).send(true);
         })
     })
 }
