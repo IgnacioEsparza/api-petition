@@ -110,7 +110,7 @@ function updateUser(req, res) {
     // if (!validacion(req.body.displayName)) return res.status(422).send({ message: `Error al crear el usuario` });
     // if (!validacion(req.body.password)) return res.status(422).send({ message: `Error al crear el usuario` });
 
-    let userId = req.params.userId;
+    let userId = req.user;
     let update = req.body;
 
     update.password = bcrypt.hashSync(req.body.password, salt);

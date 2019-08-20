@@ -19,7 +19,7 @@ api.delete('/propuesta/:propuestaId', propuestaCtrl.deletePropuesta);
 api.get('/user', auth, userCtrl.getUser);
 api.get('/users', auth, userCtrl.getUsers);
 api.delete('/user/:userId', auth, userCtrl.deleteUser);
-api.put('/user/:userId', auth, userCtrl.updateUser);
+api.put('/user', auth, userCtrl.updateUser);
 
 api.post('/signup', userCtrl.signUp);
 api.post('/login', userCtrl.signIn);
