@@ -1,7 +1,8 @@
 'use strict'
 
-const User = require('../models/user')
-const service = require('../services')
+const User = require('../models/user');
+const Propose = require('../models/propuesta');
+const service = require('../services');
 
 const bcrypt = require('bcrypt-nodejs')
 const crypto = require('crypto')
@@ -135,21 +136,28 @@ function updateUser(req, res) {
 
 }
 
-function addProposeUser(req, res){
+function addProposeUser(req, res) {
     var idPropose = req.params.idPropose;
 
-    User.findById(req.user).exec((err,user)=>{
-        if(err) return res.status(500).send({ message: `Error al actualizar producto en la base de datos ${err}` });
-        
-        if(!user) return res.status(404).send({ message: 'Usuario no encontrado' });
+    User.findById(req.user).exec((err, user) => {
+        if (err) return res.status(500).send({ message: `Error al actualizar producto en la base de datos ${err}` });
 
-        user.propuestasApoyadas.push(idPropose);
+        if (!user) return res.status(404).send({ message: 'Usuario no encontrado' });
 
-        user.save((err)=>{
-            if(err) return res.status(500).send({ message: `Error al actualizar producto en la base de datos ${err}` });
-            
-            return res.status(201).send(true);
+        Propose.findById(idPropose).exec((err, propose) => {
+            if (err) return res.status(500).send({ message: `Error al actualizar producto en la base de datos ${err}` });
+            if (!propose) return res.status(404).send({ message: 'Propuesta no encontrado' });
+            if (user.propuestasApoyadas.includes(propose)) return res.status(404).send({ message: 'Propuesta ya seleccionada' });
+
+            user.propuestasApoyadas.push(idPropose);
+
+            user.save((err) => {
+                if (err) return res.status(500).send({ message: `Error al actualizar producto en la base de datos ${err}` });
+
+                return res.status(201).send(true);
+            })
         })
+
     })
 }
 
