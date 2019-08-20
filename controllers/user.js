@@ -56,7 +56,7 @@ function getUser(req, res) {
 
     let userId = req.user;
 
-    User.findById(userId, (err, user) => {
+    User.findById(userId).populate('propuestasApoyadas').exec((err, user) => {
         if (err) {
             return res.status(500).send({ message: `Error al realizar la petición ${err}` });
         }
@@ -66,6 +66,17 @@ function getUser(req, res) {
 
         res.status(200).send({ user: user });
     })
+
+    // User.findById(userId, (err, user) => {
+    //     if (err) {
+    //         return res.status(500).send({ message: `Error al realizar la petición ${err}` });
+    //     }
+    //     if (!user) {
+    //         return res.status(404).send({ message: `Usuario inexistente` });
+    //     }
+
+    //     res.status(200).send({ user: user });
+    // })
 
 }
 
