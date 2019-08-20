@@ -20,6 +20,7 @@ api.get('/user', auth, userCtrl.getUser);
 api.get('/users', auth, userCtrl.getUsers);
 api.delete('/user/:userId', auth, userCtrl.deleteUser);
 api.put('/user', auth, userCtrl.updateUser);
+api.put('/propuesta/apoyar/:idPropose', auth, userCtrl.addProposeUser);
 
 api.post('/signup', userCtrl.signUp);
 api.post('/login', userCtrl.signIn);

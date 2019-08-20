@@ -135,6 +135,24 @@ function updateUser(req, res) {
 
 }
 
+function addProposeUser(req, res){
+    var idPropose = req.params.idPropose;
+
+    User.findById(req.user).exec((err,user)=>{
+        if(err) return res.status(500).send({ message: `Error al actualizar producto en la base de datos ${err}` });
+        
+        if(!user) return res.status(404).send({ message: 'Usuario no encontrado' });
+
+        user.propuestasApoyadas.push(idPropose);
+
+        user.save((err)=>{
+            if(err) return res.status(500).send({ message: `Error al actualizar producto en la base de datos ${err}` });
+            
+            return user.status(201).send(true);
+        })
+    })
+}
+
 function validacion(campo) {
     if (campo == null || campo == '') {
         return false;
@@ -149,6 +167,7 @@ module.exports = {
     getUser,
     getUsers,
     deleteUser,
-    updateUser
+    updateUser,
+    addProposeUser
 }
 
