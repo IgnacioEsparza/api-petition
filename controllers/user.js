@@ -147,7 +147,7 @@ function addProposeUser(req, res) {
         Propose.findById(idPropose).exec((err, propose) => {
             if (err) return res.status(500).send({ message: `Error al actualizar producto en la base de datos ${err}` });
             if (!propose) return res.status(404).send({ message: 'Propuesta no encontrado' });
-            if (user.propuestasApoyadas.includes(propose)) return res.status(404).send({ message: 'Propuesta ya seleccionada' });
+            if (user.propuestasApoyadas.includes(idPropose)) return res.status(404).send({ message: 'Propuesta ya seleccionada' });
 
             user.propuestasApoyadas.push(idPropose);
 
