@@ -161,6 +161,34 @@ function addProposeUser(req, res) {
     })
 }
 
+function deleteUserPropose(req, res) {
+    Event.findById(req.params.idPropose).exec(function (err, event) {
+        if (err) return res.status(400).send({ "error": "Error de DB" });
+        if (!event) return res.status(404).send({ error: "Esta propuesta no existe" });
+
+        User.findById(req.user).exec(function (err, user) {
+
+            if (err) return res.status(400).send({ "error": "Error de DB" });
+            if (!user) return res.status(404).send({ error: "El usuario no existe" });
+
+            let index = user.propuestasApoyadas.indexOf(req.params.idPropose);
+            if (index != -1) {
+
+                user.propuestasApoyadas.splice(index, 1);
+                user.save(function (err, event) {
+                    
+                    if (err) {
+                        return res.status(400).send({ "error": "Error de DB" });
+                    }
+                    return res.status(200).send({ succes: true });
+                });
+            } else {
+                return res.status(403).send({ error: "Propuesta no apoyada" });
+            }
+        })
+    });
+}
+
 function validacion(campo) {
     if (campo == null || campo == '') {
         return false;
@@ -176,6 +204,7 @@ module.exports = {
     getUsers,
     deleteUser,
     updateUser,
-    addProposeUser
+    addProposeUser,
+    deleteUserPropose
 }
 
