@@ -162,7 +162,7 @@ function addProposeUser(req, res) {
 }
 
 function deleteUserPropose(req, res) {
-    Event.findById(req.params.idPropose).exec(function (err, event) {
+    Propose.findById(req.params.idPropose).exec(function (err, event) {
         if (err) return res.status(400).send({ "error": "Error de DB" });
         if (!event) return res.status(404).send({ error: "Esta propuesta no existe" });
 
@@ -176,7 +176,7 @@ function deleteUserPropose(req, res) {
 
                 user.propuestasApoyadas.splice(index, 1);
                 user.save(function (err, event) {
-                    
+
                     if (err) {
                         return res.status(400).send({ "error": "Error de DB" });
                     }
