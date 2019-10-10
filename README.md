@@ -11,3 +11,6 @@ Para hacer uso de esta es necesario:
   npm install
 2. Lanzar proyecto NodeJS.
   npm start
+
+
+** El archivo config.js contiene la configuración para la conexión a la base de datos.
